@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JqueryDatePicker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,24 @@ namespace JqueryDatePicker.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            Customer cust = new Customer();
+            cust.JoinDate = DateTime.Now.ToShortDateString();
+            return View(cust);
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Index(Customer cust)
         {
-            ViewBag.Message = "Your application description page.";
+            string joinDate = cust.JoinDate;
+
+            ViewBag._firstDate = cust.JoinDate;
+            
 
             return View();
-        }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
